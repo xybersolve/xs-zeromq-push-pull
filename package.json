@@ -1,0 +1,16 @@
+{
+  "name": "xs-zeromq-push-pull",
+  "version": "1.0.0",
+  "description": "ZeroMQ push-pull services, demonstrating lightweight microservice communication",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "pull": "node ./pull.js",
+    "push": "node ./push.js",
+  },
+  "author": "Greg Milligan <xybersolve@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "zeromq": "^4.6.0"
+  }
+}

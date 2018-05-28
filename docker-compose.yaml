@@ -1,0 +1,44 @@
+#
+# ZeroMQ - Request Response Service
+#
+#  - Image is shared between container/services
+#  - Container is unique to each service type (i.e., push - pull)
+#
+version: '2'
+services:
+  push:
+    command: npm run push
+    build: .
+    image: zeromq-push-pull
+    container_name: zeromq-push
+    environment:
+      - ZMQ_BIND_ADDRESS=tcp://*:5688
+      #- ZMQ_PUB_ADDRESS=tcp://pull:5688
+
+    networks:
+      - zeromq-push-pull
+
+  pull01:
+    command: npm run pull
+    build: .
+    image: zeromq-push-pull
+    container_name: zeromq-pull01
+    environment:
+      - ZMQ_PUB_ADDRESS=tcp://push:5688
+      #- ZMQ_BIND_ADDRESS=tcp://*:5688
+    networks:
+      - zeromq-push-pull
+
+  pull02:
+    command: npm run pull
+    build: .
+    image: zeromq-push-pull
+    container_name: zeromq-pull02
+    environment:
+      - ZMQ_PUB_ADDRESS=tcp://push:5688
+      #- ZMQ_BIND_ADDRESS=tcp://*:5688
+    networks:
+      - zeromq-push-pull
+
+networks:
+  zeromq-push-pull:
